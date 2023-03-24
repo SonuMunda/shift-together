@@ -63,17 +63,6 @@
   border-bottom: 2px solid rgb(48, 48, 48);
 }
 
-.login-form input:invalid {
-  border-color: red;
-}
-
-.login-form input:invalid + .form-icon{
-  color: red;
-}
-
-.login-form input:invalid::placeholder {
-  color: red;
-}
 
 .form-icon {
   font-size: 1.4rem;
