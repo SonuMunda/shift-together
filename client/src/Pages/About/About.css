@@ -1,0 +1,36 @@
+.about-intro{
+    height: 75vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ababab;
+}
+
+
+.about-us-heading{
+    background-color: #000;
+    color: rgb(255, 255, 255);
+}
+
+.about-us-text{
+    padding: 2rem;
+    background-color: #ffffff;
+    box-shadow: inset 0 0 4px rgb(8, 5, 5);
+}
+
+.about-us-text p{
+    padding: 8px 0;
+}
+
+
+/* Story */
+
+.story-heading{
+    box-shadow: inset 0 0 4px rgb(8, 5, 5);
+}
+
+.story-text{
+    padding: 2rem;
+    color: white;
+    background-color: #000;
+}

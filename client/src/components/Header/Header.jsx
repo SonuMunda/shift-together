@@ -1,46 +1,82 @@
 import React from "react";
 import "./Header.css";
-import brand from '/images/brand.png';
+import brand from "/images/brand.png";
 import { NavLink } from "react-router-dom";
+import { FaBars } from "react-icons/fa";
+import { useState } from "react";
 
 const Header = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleNavbar = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const closeNavbar = () => {
+    setIsOpen(false);
+  };
+
+  const openWidget = () => {
+    const widget = document.querySelector(".rent-widget");
+    if (widget) {
+      widget.classList.add("show-widget");
+    }
+  };
+
   return (
     <header>
       <div className="header-container">
-        <div className="brand">
+        <div className="header-row">
+          <div className="menubar">
+            <FaBars onClick={toggleNavbar} />
+          </div>
+
+          <div className="brand">
             <img src={brand} alt="Shift Together" />
+          </div>
         </div>
 
-        <nav className="navbar">
+        <nav className={`navbar ${isOpen ? "show-navbar" : ""}`}>
           <ul className="nav-list">
             <li className="nav-item">
-              <NavLink to="/" className="nav-link">
+              <NavLink to="/" className="nav-link" onClick={closeNavbar}>
                 Home
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink to="/about" className="nav-link">
+              <NavLink to="/about" className="nav-link" onClick={closeNavbar}>
                 About
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink to="/contact" className="nav-link">
+              <NavLink to="/contact" className="nav-link" onClick={closeNavbar}>
                 Contact
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink to="/login" className="nav-link" onClick={closeNavbar}>
+                Login
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink to="/signup" className="nav-link" onClick={closeNavbar}>
+                Signup
               </NavLink>
             </li>
           </ul>
         </nav>
 
         <div className="header-btns">
-          <NavLink to="/login" className="">
-            <button className="header-btn" id="h-login-btn">Login</button>
-          </NavLink>
-
-          <NavLink to="/signup" className="">
-            <button className="header-btn" id="h-signup-btn">Signup</button>
-          </NavLink>
+          <button
+            className="header-btn"
+            id="header-rent-btn"
+            onClick={openWidget}
+          >
+            Rent a Flat
+          </button>
         </div>
       </div>
+      
     </header>
   );
 };
