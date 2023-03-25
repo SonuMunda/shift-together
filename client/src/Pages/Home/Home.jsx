@@ -5,12 +5,11 @@ const Home = () => {
   const handleWidget = () => {
     const widget = document.querySelector(".rent-widget");
     widget.classList.add("show-widget");
-  }
+  };
 
   return (
     <div className="main-wrapper">
-      
-      <RentWidget/>
+      <RentWidget />
 
       <section className="home-intro">
         <div className="home-intro-container container">
@@ -23,11 +22,12 @@ const Home = () => {
               Join our Community, make connections, and create a better world
               together.
             </p>
-
           </div>
 
           <div className="rent-btn-container">
-            <button className="rent-flat-button"  onClick={handleWidget} >Rent a Flat</button>
+            <button className="rent-flat-button" onClick={handleWidget}>
+              Rent a Flat
+            </button>
           </div>
         </div>
       </section>
@@ -49,9 +49,71 @@ const Home = () => {
               Need helplines contacts just choose your colony's area.
             </h5>
           </div>
+
+          <div className="location-menu">
+            <div className="location-menu-container">
+              <label htmlFor="location-menu-heading">
+                Choose Colony's Location
+              </label>
+              <select name="location-name" id="loction-selector">
+                <option value="mohali">Mohali</option>
+                <option value="kharar">Kharar</option>
+                <option value="gharuan">Gharuan</option>
+                <option value="panchkula">Panchkula</option>
+                <option value="morinda">Morinda</option>
+                <option value="">Chandigarh</option>
+              </select>
+            </div>
+          </div>
+          <div className="location-data">
+            <div className="location-data-container">
+              <div className="location-data-heading">
+                <h3 className="text-center text-uppercase">Mohali</h3>
+              </div>
+              <div className="helpline-numbers">
+                <div className="helpline-numbers-container">
+                  <table className="contacts-table table table-striped">
+                    <thead className="table-heading">
+                      <tr className="th-row">
+                        <th className="sr-no">#</th>
+                        <th className="s-name">Service Name</th>
+                        <th className="h-numbers">Helpline Number</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>#</td>
+                        <td>Police</td>
+                        <td>0172-2222222</td>
+                      </tr>
+                      <tr>
+                        <td>#</td>
+                        <td>Police</td>
+                        <td>0172-2222222</td>
+                      </tr>
+                      <tr>
+                      <td>#</td>
+                        <td>Police</td>
+                        <td>0172-2222222</td>
+                      </tr>
+                      <tr>
+                        <td>#</td>
+                        <td>Police</td>
+                        <td>0172-2222222</td>
+                      </tr>
+                      <tr>
+                        <td>#</td>
+                        <td>Police</td>
+                        <td>0172-2222222</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
-
     </div>
   );
 };
