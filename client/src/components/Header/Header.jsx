@@ -32,7 +32,9 @@ const Header = () => {
           </div>
 
           <div className="brand">
-            <img src={brand} alt="Shift Together" />
+            <NavLink to="/">
+              <img src={brand} alt="Shift Together" />
+            </NavLink>
           </div>
         </div>
 
@@ -76,7 +78,6 @@ const Header = () => {
           </button>
         </div>
       </div>
-      
     </header>
   );
 };
