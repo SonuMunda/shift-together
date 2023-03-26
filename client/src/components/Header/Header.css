@@ -9,10 +9,11 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  background-color: #fff;
+  background-color: #101010;
+  backdrop-filter: blur(10px);
   z-index: 1;
-  border-radius:0 0 100px 100px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.299);
+  border-radius: 0 0 100px 100px;
+  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.299);
 }
 .header-container {
   width: 100%;
@@ -21,7 +22,7 @@ header {
   justify-content: space-around;
 }
 
-.header-row{
+.header-row {
   display: flex;
   align-items: center;
 }
@@ -32,7 +33,7 @@ header {
   font-size: 1.8rem;
   margin-right: 2rem;
   padding: 0.5rem;
-  color: #000;
+  color: #ffffff;
 }
 /* Brand Name */
 .brand img {
@@ -55,19 +56,19 @@ header {
 
 .nav-link {
   text-decoration: none;
-  color: #000;
+  color: #ffffff;
   padding: 12px 24px;
   border-radius: 4px;
 }
 
 .nav-link:hover {
-  background-color: #000000;
-  color: #fff;
+  background-color: #ffffff;
+  color: #000000;
 }
 
 .nav-link.active {
-  background-color: #000;
-  color: #fff;
+  background-color: #ffffff;
+  color: #000000;
 }
 
 /* header Btn */
@@ -76,19 +77,25 @@ header {
   padding: 12px 24px;
   outline: none;
   border-radius: 4px;
-  background-color: #ffffff;
-  color: #000000;
-  border: 2px solid #000000;
+  background-color: transparent;
+  color: #ffffff;
+  border: 2px solid #ffffff;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
 }
 
 .header-btns .header-btn:hover {
-  background-color: #000000;
-  color: #ffffff;
+  background-color: #ffffff;
+  color: #000000;
 }
 
 /* mobile view */
+
+@media screen and (max-width: 1242px) {
+  header {
+    border-radius: 0;
+  }
+}
 
 @media screen and (max-width: 992px) {
   .navbar {
@@ -97,7 +104,7 @@ header {
     left: 0;
     height: 0px;
     width: 100%;
-    background-color: #fff;
+    background-color: #101010;
     z-index: 1;
     overflow: hidden;
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.47);
@@ -130,20 +137,21 @@ header {
   }
 }
 
-@media screen and (max-width: 575px){
-  .brand img{
+@media screen and (max-width: 575px) {
+  .brand img {
     height: 38px;
   }
 
-  .header-btns .header-btn{
+  .header-btns .header-btn {
     padding: 8px 16px;
     font-size: 12px;
   }
 
-  .menubar{
-    font-size: 1.4rem;}
+  .menubar {
+    font-size: 1.4rem;
+  }
 
-    .nav-link{
-      font-size: 14px;
-    }
+  .nav-link {
+    font-size: 14px;
+  }
 }

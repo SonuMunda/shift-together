@@ -1,7 +1,7 @@
 import React from "react";
 import "./Home.css";
 import RentWidget from "../../components/RentWidget/RentWidget";
-const Home = () => {
+const Home = (props) => {
   const handleWidget = () => {
     const widget = document.querySelector(".rent-widget");
     widget.classList.add("show-widget");
@@ -31,21 +31,58 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <hr />
 
+      {/* Plans Section */}
+      <section className="plans">
+        <div className="plans-container p-4">
+          <div className="plans-heading">
+            <h2 className="text-center fw-bold my-4 py-2 text-uppercase">
+              Floor Plans & Price
+            </h2>
+          </div>
+          {props.PlanCard}
+        </div>
+      </section>
+      <hr />
+      {/* Facilities Section */}
+      <section className="facilities">
+        <div className="facilities-container container py-4">
+          <div className="facilities-heading">
+            <h2 className="text-center fw-bold my-4 py-2 text-uppercase">
+              Facilities & Amenities
+            </h2>
+          </div>
+          <div className="facilities-sub-heading">
+            <h6 className="fw-bold text-uppercase">Top Facilities</h6>
+          </div>
+          <div className="facilities-text">
+            <p>
+              Shift Together presents an exclusive opportunity to own a stunning
+              home that offers all kinds of amenities and facilities. This
+              includes a sewage treatment plant, 24x7 security, and easy access
+              to 24/7 power backup. It also has a gated community, an exclusive
+              offering only for Shift Together residents. Shift Together has an
+              excellent combination of comfort and convenience to suit every
+              requirement as well as need.
+            </p>
+          </div>
+
+          <div className="facilities-content">{props.FacilitiesCard}</div>
+        </div>
+      </section>
+
+      <hr />
+      {/* Help Sections */}
       <section className="help-section">
         <div className="help-sec-container p-3">
           <div className="help-sec-heading d-flex justify-content-center">
-            <h2
-              className="help-heading text-center fw-bold my-4 py-2"
-              style={{ borderBottom: "3px solid black", width: "fit-content" }}
-            >
+            <h2 className="help-heading text-uppercase text-center fw-bold mt-3 py-2">
               We provide 24x7 Help
             </h2>
           </div>
 
           <div className="help-sec-subheading">
-            <h5 className="text-center">
+            <h5 className="text-center text-uppercase">
               Need helplines contacts just choose your colony's area.
             </h5>
           </div>
@@ -92,7 +129,7 @@ const Home = () => {
                         <td>0172-2222222</td>
                       </tr>
                       <tr>
-                      <td>#</td>
+                        <td>#</td>
                         <td>Police</td>
                         <td>0172-2222222</td>
                       </tr>
