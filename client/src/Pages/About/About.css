@@ -13,9 +13,10 @@
   width: 100%;
   top: 0;
   left: 0;
-  background: rgba(0, 0, 0, 0.7) url("/images/about-page-background.jpg") center
+  background: rgba(0, 0, 0, 0.5) url("/images/about-page-background.jpg") center
     center/cover no-repeat;
-    z-index: -1;
+    background-blend-mode: darken;
+  z-index: -1;
 }
 
 .about-row {
@@ -65,10 +66,37 @@
   width: 100%;
 }
 
-.story-heading {
-}
-
 .story-text {
   padding: 2rem;
   color: rgb(0, 0, 0);
+}
+
+@media screen and (max-width: 540px) {
+  .about-intro {
+    height: 50vh;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .about-row {
+    flex-direction: column;
+  }
+  .about-col {
+    width: 100%;
+  }
+
+  .about-us-text {
+    padding: 0;
+  }
+
+  .story-row {
+    flex-direction: column-reverse;
+  }
+  .story-col {
+    width: 100%;
+  }
+
+  .story-text {
+    padding: 0;
+  }
 }

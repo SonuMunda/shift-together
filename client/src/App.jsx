@@ -1,6 +1,7 @@
 import React from "react";
 import Home from "./Pages/Home/Home";
 import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Contact from "./Pages/Contact/Contact";
 import About from "./Pages/About/About";
@@ -29,6 +30,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Register />} />
         </Routes>
+        <Footer />
       </Router>
     </>
   );

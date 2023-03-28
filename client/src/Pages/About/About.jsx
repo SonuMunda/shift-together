@@ -9,13 +9,13 @@ const About = () => {
       <RentWidget />
 
       <section className="about-intro">
-        <div className="intro-container">
+        <div className="about-intro-container">
           <div className="intro-text">
-            <h5 className="intro-text">
-              <span className="greet">About</span>
-            </h5>
+            <h3 className="intro-text">
+              <span className="intro-heading text-uppercase">About</span>
+            </h3>
             <h1 className="intro-text">
-              <span>Shift Together</span>
+              <span className="intro-sub-heading text-uppercase">Shift Together</span>
             </h1>
           </div>
         </div>

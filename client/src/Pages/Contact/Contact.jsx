@@ -8,6 +8,12 @@ const Contact = () => {
       {/* Rent Widget */}
       <RentWidget />
 
+      <section className="contact-intro">
+        <div className="contact-heading text-light">
+          <h4 className="text-uppercase fw-bold">Contact us</h4>
+        </div>
+      </section>
+
       {/* Contact Section */}
       <section className="contact">
         <div className="contact-container">

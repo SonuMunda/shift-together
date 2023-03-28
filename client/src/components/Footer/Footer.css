@@ -1,0 +1,36 @@
+footer{
+    text-align: center;
+    background-color: rgb(25, 25, 25);
+    color: white;
+}
+
+.f-row{
+    flex-wrap: wrap;
+    text-align: left;
+}
+
+.f-col{
+    margin: 1rem;
+    width: 360px;
+}
+
+.f-col ul{
+    list-style: none;
+}
+
+.f-col ul li a{
+    text-decoration: none;
+    color: gray;
+}
+
+.f-col ul li a:hover{
+    text-decoration: underline;
+}
+
+.f-icon{
+    font-size: 2.4rem;
+}
+
+.cr{
+    background-color: rgb(16, 16, 16);
+}
