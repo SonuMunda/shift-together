@@ -15,7 +15,7 @@
   left: 0;
   background: rgba(0, 0, 0, 0.5) url("/images/about-page-background.jpg") center
     center/cover no-repeat;
-    background-blend-mode: darken;
+  background-blend-mode: darken;
   z-index: -1;
 }
 
@@ -71,9 +71,47 @@
   color: rgb(0, 0, 0);
 }
 
+/* Mission Section */
+
+.mission {
+  height: 75vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.mission ::before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: url("/images/pexels-curtis-adams-3773572.jpg") center center/cover
+    no-repeat;
+  z-index: -1;
+}
+
+.mission-container {
+  padding: 2rem;
+  width: 65%;
+  color: rgb(50, 50, 50);
+  background-color: #ffffffab;
+}
+
+/* .b-btm{
+  width: 10%;
+  border-bottom: 4px solid rgb(50, 50, 50);
+} */
+
 @media screen and (max-width: 540px) {
   .about-intro {
     height: 50vh;
+  }
+  .mission-container
+  {
+    width: 80%;
   }
 }
 

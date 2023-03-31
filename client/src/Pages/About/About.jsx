@@ -15,7 +15,9 @@ const About = () => {
               <span className="intro-heading text-uppercase">About</span>
             </h3>
             <h1 className="intro-text">
-              <span className="intro-sub-heading text-uppercase">Shift Together</span>
+              <span className="intro-sub-heading text-uppercase">
+                Shift Together
+              </span>
             </h1>
           </div>
         </div>
@@ -105,6 +107,31 @@ const About = () => {
                 <img src={storyImg} alt="" />
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+      <hr />
+      {/* Mission */}
+      <section className="mission">
+        <div className="mission-container">
+          <div className="heading">
+            <h2 className="fw-bold text-uppercase py-2">Our Vision</h2>
+          </div>
+          <div className="content">
+            <p className="py-3">
+              To become recognized as a leading name in the world of real
+              estate, delivering excellent projects with the highest standards
+              in design, quality, and aesthetics.
+            </p>
+          </div>
+          <div className="heading">
+            <h2 className="fw-bold text-uppercase py-2">Our Mission</h2>
+          </div>
+          <div className="content">
+            <p className="py-3">
+              To understand clients’ needs and deliver superior living spaces at
+              economical costs.
+            </p>
           </div>
         </div>
       </section>

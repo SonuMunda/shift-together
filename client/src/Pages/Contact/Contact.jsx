@@ -113,7 +113,7 @@ const Contact = () => {
                   placeholder="Message"
                   className="form-control"
                   required
-                  maxlength="200"
+                  maxLength="200"
                 ></textarea>
               </div>
 
