@@ -1,11 +1,13 @@
 import React from "react";
 import "./PlanCard.css";
+import {Link} from "react-router-dom";
 import plans from "../../api/plans";
 
 const PlanCard = () => {
   return (
     <div className="plan-card-row">
       {plans.map((plan, index) => (
+        <Link to={plan.link} className="plan-link" key={index}>
         <div className="plan-card" key={index}>
           <div className="plan-col-heading">
             <h5 className="fw-bold p-2">Price on Request</h5>
@@ -27,6 +29,7 @@ const PlanCard = () => {
             <p className="fw-bold">{plan.price} per month</p>
           </div>
         </div>
+        </Link>
       ))}
     </div>
   );

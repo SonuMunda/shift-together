@@ -5,6 +5,11 @@
   justify-content: center;
 }
 
+.plan-link{
+  text-decoration: none;
+  color: black;
+}
+
 .plan-card {
   width: 324px;
   border-radius: 8px;
@@ -15,9 +20,6 @@
   transition: all 0.3s ease-in-out;
 }
 
-.plan-card:hover{
-    transform: scale(1.05);
-}
 
 .card-image img {
   width: 100%;
