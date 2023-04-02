@@ -1,6 +1,5 @@
 import React from "react";
 import "./RentWidget.css";
-import { useState } from "react";
 
 const RentWidget = () => {
 
@@ -71,11 +70,29 @@ const RentWidget = () => {
                   required
                   className="widget-control"
                 >
-                  <option value="">Select duration</option>
+                  <option value="">Duration</option>
                   <option value="1 month">1 month</option>
                   <option value="3 months">3 months</option>
                   <option value="6 months">6 months</option>
                   <option value="1 year">1 year</option>
+                  <option value="above 1 year">More than year</option>
+                </select>
+              </div>
+
+              <div className="widget-form-group">
+                <label htmlFor="duration">Duration</label>
+                <select
+                  id="duration"
+                  name="duration"
+                  required
+                  className="widget-control"
+                >
+                  <option value="">Area</option>
+                  <option value="mohali">Mohali</option>
+                  <option value="chandigarh">Chandigarh</option>
+                  <option value="patiala">Patiala</option>
+                  <option value="Kharar">Kharar</option>
+                  <option value="morinda">Morinda</option>
                 </select>
               </div>
 

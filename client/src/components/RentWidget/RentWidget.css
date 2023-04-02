@@ -1,21 +1,36 @@
+
 .rent-widget {
   position: fixed;
-  top: 0px;
-  right: -375px;
+  top: 100vh;
+  left: 50%;
+  height: 90vh;
+  transform: translateX(-50%);
   background-color: #101010;
   color: white;
-  width: 375px;
-  height: 100vh;
+  width: 0%;
   border-radius: 8px;
   box-shadow: inset 0px 0px 4px rgb(163, 163, 163);
   padding: 1rem 0.4rem;
   z-index: 1;
-  transition: all 0.8s ease-in-out;
-  overflow-y: scroll;
+  transition: all 0.4s ease-in-out;
+  overflow: hidden;
 }
 
 .show-widget{
-  right: 0px;
+  top: 9vh;
+  width: 50%;
+}
+
+.widget-container{
+  position: relative;
+  height: 100%;
+  width: 100%;
+  border-radius: 8px;
+  overflow-y: scroll;
+}
+
+.widget-container::-webkit-scrollbar {
+  display: none;
 }
 
 
@@ -78,4 +93,16 @@
   border: none;
   outline: none;
   border-radius: 4px;
+}
+
+@media screen and (max-width:992px) {
+  .rent-widget{
+    width: 80%;
+  }
+}
+
+@media screen and (max-width:574px) {
+  .rent-widget{
+    width: 98%;
+  }
 }
