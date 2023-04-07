@@ -1,4 +1,5 @@
 import React from "react";
+import 'animate.css';
 import Home from "./Pages/Home/Home";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
@@ -10,6 +11,7 @@ import Contact from "./Pages/Contact/Contact";
 import About from "./Pages/About/About";
 import Login from "./Pages/Login/Login";
 import Register from "./Pages/Register/Register";
+import Helpline from "./Pages/Helpline/Helpline";
 import PlanCard from "./components/Plans Card/PlanCard";
 import FacilitiesCard from "./components/Facilities Card/FacilitiesCard";
 function App() {
@@ -33,6 +35,7 @@ function App() {
           <Route path="/3bhk" element={<Plan3 />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/helpline" element={<Helpline />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Register />} />
         </Routes>

@@ -12,7 +12,7 @@ const Home = (props) => {
       <RentWidget />
 
       <section className="home-intro">
-        <div className="home-intro-container container">
+        <div className="home-intro-container container animate__animated animate__bounce">
           <div className="home-intro-text">
             <h5 className="intro-text text-community">
               <span>Shift Together Community</span>

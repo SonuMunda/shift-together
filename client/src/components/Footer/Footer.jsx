@@ -23,7 +23,7 @@ const Footer = () => {
                 <Link to="/contact"> Contact</Link>
               </li>
               <li className="py-1">
-                <Link to="#"> Help</Link>
+                <Link to="/helpline"> Help</Link>
               </li>
             </ul>
           </div>
