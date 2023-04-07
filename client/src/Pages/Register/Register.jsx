@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import "./Register.css";
+import axios from 'axios';
 import { Link } from "react-router-dom";
 import { BiUser, BiAt, BiMobileAlt, BiLock } from "react-icons/bi";
 import signupImg from "/images/signup_bg.png";
 import RentWidget from "../../components/RentWidget/RentWidget";
 
 const Register = () => {
-  const [formData, setFormData] = useState({
-    username: "",
+  const [useDetails, setuseDetails] = useState({
+    name: "",
     email: "",
     phone: "",
     password: "",
@@ -16,72 +17,40 @@ const Register = () => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setFormData((prevFormData) => ({
-      ...prevFormData,
+    setuseDetails((prevuseDetails) => ({
+      ...prevuseDetails,
       [name]: value,
     }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-
-    // Check if all form fields are filled
-    if (
-      !formData.username ||
-      !formData.email ||
-      !formData.phone ||
-      !formData.password ||
-      !formData.cpassword
-    ) {
-      alert("Please fill all form fields.");
-      return;
+    const { name, email, phone, password, cpassword } = useDetails;
+    
+    try {
+      const response = await axios.post('http://localhost:5000/register', {
+        name,
+        email,
+        phone,
+        password,
+        cpassword,
+      });
+      
+      console.log(response.data);
+      window.alert("Registration Successful");
+      setuseDetails({
+        name: "",
+        email: "",
+        phone: "",
+        password: "",
+        cpassword: "",
+      });
+    } catch (error) {
+      console.error(error);
+      window.alert("Invalid Registration");
     }
-
-    // Number validation
-    const numberRegex = /\d+/;
-    if (numberRegex.test(formData.username)) {
-      alert("Username should not contain any numbers.");
-      return;
-    }
-
-    // Size validation
-    if (formData.username.length < 4 || formData.username.length > 20) {
-      alert("Username must between 4 and 20 characters");
-      return;
-    }
-
-    // Check if email is valid
-    const emailRegex = /\S+@\S+\.\S+/;
-    if (!emailRegex.test(formData.email)) {
-      alert("Please enter a valid email address.");
-      return;
-    }
-
-    // Check if phone number is valid
-    const phoneRegex = /^\d{10}$/;
-    if (!phoneRegex.test(formData.phone)) {
-      alert("Please enter a valid 10-digit phone number.");
-      return;
-    }
-
-    // Check if password and confirm password match
-    if (formData.password !== formData.cpassword) {
-      alert("Passwords do not match.");
-      return;
-    }
-
-    // All form fields are valid, submit the form
-    console.log(formData);
-
-    // Clear the form
-    setFormData({
-      username: "",
-      email: "",
-      phone: "",
-      password: "",
-      cpassword: "",
-    });
   };
+  
 
   return (
     <div className="main-wrapper">
@@ -95,17 +64,17 @@ const Register = () => {
                 <div className="signup-heading">
                   <h4 className="signup-text p-2">Signup</h4>
                 </div>
-                <form className="signup-form" onSubmit={handleSubmit}>
+                <form className="signup-form" method="POST">
                   <div className="form-group">
                     <div className="form-icon">
                       <BiUser />
                     </div>
                     <input
                       type="text"
-                      name="username"
+                      name="name"
                       className="signup-form-control"
-                      placeholder="Username"
-                      value={formData.username}
+                      placeholder="name"
+                      value={useDetails.name}
                       onChange={handleChange}
                       required
                     />
@@ -119,7 +88,7 @@ const Register = () => {
                       name="email"
                       className="signup-form-control"
                       placeholder="Email"
-                      value={formData.email}
+                      value={useDetails.email}
                       onChange={handleChange}
                       required
                     />
@@ -133,7 +102,7 @@ const Register = () => {
                       name="phone"
                       className="signup-form-control"
                       placeholder="Phone"
-                      value={formData.phone}
+                      value={useDetails.phone}
                       onChange={handleChange}
                       required
                     />
@@ -147,7 +116,7 @@ const Register = () => {
                       name="password"
                       className="signup-form-control"
                       placeholder="Password"
-                      value={formData.password}
+                      value={useDetails.password}
                       onChange={handleChange}
                       required
                     />
@@ -161,13 +130,18 @@ const Register = () => {
                       name="cpassword"
                       className="signup-form-control"
                       placeholder="Confirm Password"
-                      value={formData.cpassword}
+                      value={useDetails.cpassword}
                       onChange={handleChange}
                       required
                     />
                   </div>
 
-                  <input type="submit" value="signup" className="signup-btn" />
+                  <input
+                    type="submit"
+                    value="signup"
+                    className="signup-btn"
+                    onClick={handleSubmit}
+                  />
                 </form>
 
                 <div className="signup-text my-2">

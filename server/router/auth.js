@@ -21,7 +21,7 @@ router.get("/", (req, res) => {
 
 
 // Signup route
-router.post("/signup", async (req, res) => {
+router.post("/register", async (req, res) => {
   try {
     // destructuring the request body
     const { name, email, phone, password, cpassword } = req.body;
