@@ -1,15 +1,46 @@
-import React from "react";
+import React, { useState} from "react";
 import "./Login.css";
-import { Link } from "react-router-dom";
+import { Link , useNavigate} from "react-router-dom";
 import { BiLock, BiUser } from "react-icons/bi";
 import loginBG from "/images/login_bg.png";
 import RentWidget from "../../components/RentWidget/RentWidget";
 
 const Login = () => {
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate()
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await fetch('http://localhost:5000/signin', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email,
+          password
+        })
+      });
+      const data = await response.json();
+      if (response.status === 400 || !data) {
+        setError("Invalid Credentials");
+      } else {
+        window.alert("Login Successfull");
+        navigate('/');
+      }
+    } catch (error) {
+      setError("Something went wrong");
+    }
+  };
+
   return (
     <div className="main-wrapper">
       {/* rent widget */}
-      <RentWidget/>
+      <RentWidget />
 
       {/* Login Section */}
       <section className="login">
@@ -27,7 +58,8 @@ const Login = () => {
                 </div>
 
                 {/* Login Form */}
-                <form className="login-form">
+                <form className="login-form" onSubmit={handleFormSubmit} method="POST">
+                  {error && <p className="error">{error}</p>}
                   <div className="form-group">
                     <div className="form-icon">
                       <BiUser />
@@ -37,6 +69,8 @@ const Login = () => {
                       name="user-email"
                       className="login-form-control"
                       placeholder="Email"
+                      value={email}
+                      onChange={(event) => setEmail(event.target.value)}
                       required
                     />
                   </div>
@@ -49,6 +83,8 @@ const Login = () => {
                       name="user-password"
                       className="login-form-control"
                       placeholder="Password"
+                      value={password}
+                      onChange={(event) => setPassword(event.target.value)}
                       required
                     />
                   </div>
@@ -57,11 +93,10 @@ const Login = () => {
                 </form>
 
                 <div className="login-text my-2">
-                <Link to="/signup" className="signup-link">
-                  Don't have an account? Signup
-                </Link>
-              </div>
-
+                  <Link to="/signup" className="signup-link">
+                    Don't have an account? Signup
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
