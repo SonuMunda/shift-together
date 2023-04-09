@@ -3,6 +3,30 @@ import "./Contact.css";
 import RentWidget from "../../components/RentWidget/RentWidget";
 import { FaMobileAlt, FaEnvelope, FaMapMarkedAlt } from "react-icons/fa";
 const Contact = () => {
+
+  const GetData = async () => {
+    try {
+      const res = await fetch('http://localhost:5000/getdata', {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('jwt')}`,
+        },
+      });
+  
+      const data = await res.json();
+  
+      if (res.status === 200) {
+        console.log(data);
+      } else {
+        throw new Error(data.error);
+      }
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+  
   return (
     <div className="main-wrapper">
       {/* Rent Widget */}
