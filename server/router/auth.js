@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
+const Authenticate = require("../middleware/authenticate");
+
 // importing bcrypt for hashing the password
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
@@ -13,7 +15,6 @@ require("../db/conn");
 
 //importing the user schema
 const User = require("../model/userSchema");
-const Authenticate = require("../middleware/authenticate");
 
 // define routes
 router.get("/", (req, res) => {
@@ -86,7 +87,7 @@ router.post("/signin", async (req, res) => {
       return res.status(400).json({ error: "Invalid credentials." });
     }
 
-    const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
+    const token = jwt.sign({ _id: user._id }, process.env.SECRET_KEY);
 
     // Set cookie with the token
     res.cookie("token", token, {
@@ -96,15 +97,56 @@ router.post("/signin", async (req, res) => {
       sameSite: "none",
     });
 
-    res.json({ message: "User signed in successfully.", token });
+    // Send user details along with the token
+    const { _id, name, email: userEmail } = user;
+    res.json({
+      message: "User signed in successfully.",
+      token,
+      user: { _id, name, email: userEmail, phone: user.phone },
+    });
   } catch (err) {
-    res.status(500).json({ error: "Failed to sign in." });
+    // Return specific error message from server
+    res.status(500).json({ error: `Failed to sign in. ${err.message}` });
   }
 });
 
-router.get("/getdata", Authenticate, (req, res) => {
-  res.send(req.rootUser);
-  console.log(rootUser);
+router.get("/getdata", Authenticate, async (req, res) => {
+  try {
+    const user = await User.findById(req.userId);
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    res.json({
+      message: "User details retrieved successfully.",
+      user,
+    });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+});
+
+router.get("/contact", async (req, res) => {
+  try {
+    const { name, email, phone, message } = req.body;
+
+    // Check if any of the required fields are missing
+    if (!name || !email || !phone || !message) {
+      console.log("Fill All Fields");
+      return res
+        .status(400)
+        .json({ error: "Please fill out all required fields." });
+    }
+
+    // Return a success message
+    res.json({
+      message: "Thank you for your message. We will be in touch shortly.",
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Internal server error" });
+  }
 });
 
 module.exports = router;

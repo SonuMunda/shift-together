@@ -4,6 +4,7 @@ import brand from "/images/brand.png";
 import { NavLink } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
 import { useState } from "react";
+import {animate, motion} from 'framer-motion'
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,18 +25,18 @@ const Header = () => {
   };
 
   return (
-    <header>
+    <motion.header initial={{marginTop:"-75"}} animate={{marginTop:0}} transition={{type:'spring' , delay:0.4}}>
       <div className="header-container">
         <div className="header-row">
           <div className="menubar">
             <FaBars onClick={toggleNavbar} />
           </div>
 
-          <div className="brand">
+          <motion.div className="brand" initial={{}}>
             <NavLink to="/">
               <img src={brand} alt="Shift Together" />
             </NavLink>
-          </div>
+          </motion.div>
         </div>
 
         <nav className={`navbar ${isOpen ? "show-navbar" : ""}`}>
@@ -78,7 +79,7 @@ const Header = () => {
           </button>
         </div>
       </div>
-    </header>
+    </motion.header>
   );
 };
 

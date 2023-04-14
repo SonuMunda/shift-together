@@ -1,37 +1,23 @@
-const jwt = require("jsonwebtoken");
 const User = require("../model/userSchema");
+const jwt = require("jsonwebtoken");
 
 const Authenticate = async (req, res, next) => {
   try {
-    const token = req.cookies.jwtoken;
+    const token = req.cookies.token;
+    const verified = jwt.verify(token, process.env.SECRET_KEY);
+    const user = await User.findOne({ _id: verified._id });
 
-    // Check if token is present
-    if (!token) {
-      return res.status(401).json({ error: "Unauthorized" });
-    }
-
-    // Verify token
-    const verifyToken = jwt.verify(token, process.env.SECRET_KEY);
-
-    // Find user with the matching token
-    const rootUser = await User.findOne({
-      _id: verifyToken._id,
-      "tokens.token": token,
-    });
-
-    // Check if user exists
-    if (!rootUser) {
-      throw new Error("User not found");
+    if (!user) {
+      throw new Error();
     }
 
     req.token = token;
-    req.rootUser = rootUser;
-    req.userId = rootUser._id;
+    req.rootUser = user;
+    req.userId = user._id;
 
     next();
   } catch (err) {
-    console.log(err);
-    return res.status(401).json({ error: "Unauthorized" });
+    res.status(401).json({ error: "Unauthorized access." });
   }
 };
 

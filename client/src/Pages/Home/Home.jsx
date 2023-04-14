@@ -1,5 +1,6 @@
 import React from "react";
 import "./Home.css";
+import { motion } from "framer-motion"
 import RentWidget from "../../components/RentWidget/RentWidget";
 const Home = (props) => {
   const handleWidget = () => {
@@ -12,8 +13,10 @@ const Home = (props) => {
       <RentWidget />
 
       <section className="home-intro">
-        <div className="home-intro-container container animate__animated animate__bounce">
-          <div className="home-intro-text">
+        <div className="home-intro-container container">
+          <motion.div className="home-intro-text"
+          initial={{marginBottom:"20"}} animate={{marginBottom:0}} transition={{type:'spring' , delay:0.4}}
+          >
             <h5 className="intro-text text-community">
               <span>Shift Together Community</span>
             </h5>
@@ -22,12 +25,14 @@ const Home = (props) => {
               Join our Community, make connections, and create a better world
               together.
             </p>
-          </div>
+          </motion.div>
 
           <div className="rent-btn-container">
-            <button className="rent-flat-button" onClick={handleWidget}>
+            <motion.button className="rent-flat-button" onClick={handleWidget}
+            initial={{marginLeft:"-100vw"}} animate={{marginLeft:0}} transition={{type:'spring' , delay:0.4}}
+            >
               Rent a Flat
-            </button>
+            </motion.button>
           </div>
         </div>
       </section>

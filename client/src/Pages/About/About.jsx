@@ -1,5 +1,6 @@
 import React from "react";
 import "./About.css";
+import {motion} from 'framer-motion';
 import aboutImg from "/images/about-image-1.jpg";
 import storyImg from "/images/about-image-2.jpg";
 import RentWidget from "../../components/RentWidget/RentWidget";
@@ -10,7 +11,9 @@ const About = () => {
 
       <section className="about-intro">
         <div className="about-intro-container">
-          <div className="intro-text">
+          <motion.div className="intro-text" 
+           initial={{scale:0}} animate={{scale:1}} transition={{type:'spring' , delay:0.4}}
+          >
             <h3 className="intro-text">
               <span className="intro-heading text-uppercase">About</span>
             </h3>
@@ -19,7 +22,7 @@ const About = () => {
                 Shift Together
               </span>
             </h1>
-          </div>
+          </motion.div>
         </div>
       </section>
       <hr />

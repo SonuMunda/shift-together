@@ -1,32 +1,76 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Contact.css";
 import RentWidget from "../../components/RentWidget/RentWidget";
 import { FaMobileAlt, FaEnvelope, FaMapMarkedAlt } from "react-icons/fa";
 const Contact = () => {
+  const [userData, setUserData] = useState({
+    userName: "",
+    userEmail: "",
+    userPhone: "",
+    userMessage: "",
+  });
 
-  const GetData = async () => {
-    try {
-      const res = await fetch('http://localhost:5000/getdata', {
-        method: 'GET',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('jwt')}`,
-        },
-      });
-  
-      const data = await res.json();
-  
-      if (res.status === 200) {
-        console.log(data);
-      } else {
-        throw new Error(data.error);
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch("http://localhost:5000/getdata", {
+          credentials: "include",
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch data");
+        }
+
+        const data = await response.json();
+        const { name, email, phone } = data.user;
+        setUserData({
+          ...userData,
+          userName: name,
+          userEmail: email,
+          userPhone: phone,
+        });
+      } catch (error) {
+        console.error(error);
       }
-    } catch (err) {
-      console.log(err.message);
+    }
+
+    fetchData();
+  }, []);
+
+  const handleChange = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+
+    setUserData({ ...userData, [name]: value });
+  };
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      const response = await fetch("http://localhost:5000/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to send data");
+      }
+
+      // Clear form data after successful submission
+      setUserData({ ...userData, userMessage: "" });
+
+      // Show success message to user
+      alert("Form submitted successfully!");
+    } catch (error) {
+      console.error(error);
+      alert("Failed to submit form. Please try again later.");
     }
   };
-  
+
   return (
     <div className="main-wrapper">
       {/* Rent Widget */}
@@ -96,23 +140,27 @@ const Contact = () => {
 
             {/* Contact form */}
 
-            <form action="">
+            <form onSubmit={handleFormSubmit}>
               <div className="form-group-row">
                 <div className="form-group">
                   <input
                     type="text"
-                    name="user-name"
+                    name="userName"
                     placeholder="John"
                     className="form-control"
+                    value={userData.userName || ""}
+                    onChange={handleChange}
                     required
                   />
                 </div>
                 <div className="form-group">
                   <input
                     type="email"
-                    name="user-email"
+                    name="userEmail"
                     placeholder="jhon@email.com"
                     className="form-control"
+                    value={userData.userEmail || ""}
+                    onChange={handleChange}
                     required
                     pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                   />
@@ -120,9 +168,11 @@ const Contact = () => {
                 <div className="form-group">
                   <input
                     type="text"
-                    name="user-phone"
+                    name="userPhone"
                     placeholder="6800000021"
                     className="form-control"
+                    value={userData.userPhone || ""}
+                    onChange={handleChange}
                     required
                     pattern="[0-9]{10}"
                   />
@@ -130,13 +180,15 @@ const Contact = () => {
               </div>
               <div className="form-group">
                 <textarea
-                  name="message-box"
+                  name="userMessage" // change name attribute
                   id="msg-box"
                   cols="30"
                   rows="10"
                   placeholder="Message"
                   className="form-control"
                   required
+                  onChange={handleChange}
+                  value={userData.userMessage}
                   maxLength="200"
                 ></textarea>
               </div>

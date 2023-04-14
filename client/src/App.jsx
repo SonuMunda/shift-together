@@ -1,5 +1,4 @@
 import React from "react";
-import 'animate.css';
 import Home from "./Pages/Home/Home";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";

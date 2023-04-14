@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Register.css";
-import axios from 'axios';
-import { Link } from "react-router-dom";
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 import { BiUser, BiAt, BiMobileAlt, BiLock } from "react-icons/bi";
 import signupImg from "/images/signup_bg.png";
 import RentWidget from "../../components/RentWidget/RentWidget";
@@ -23,19 +23,21 @@ const Register = () => {
     }));
   };
 
+  const navigate = useNavigate();
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const { name, email, phone, password, cpassword } = useDetails;
-    
+
     try {
-      const response = await axios.post('http://localhost:5000/register', {
+      const response = await axios.post("http://localhost:5000/register", {
         name,
         email,
         phone,
         password,
         cpassword,
       });
-      
+
       console.log(response.data);
       window.alert("Registration Successful");
       setuseDetails({
@@ -45,12 +47,12 @@ const Register = () => {
         password: "",
         cpassword: "",
       });
+      navigate("/login"); //for navigating user to login page
     } catch (error) {
       console.error(error);
       window.alert("Invalid Registration");
     }
   };
-  
 
   return (
     <div className="main-wrapper">
