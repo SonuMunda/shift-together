@@ -1,8 +1,33 @@
-import React from "react";
+import React, {useState,useEffect} from "react";
 import "./Home.css";
 import { motion } from "framer-motion"
 import RentWidget from "../../components/RentWidget/RentWidget";
 const Home = (props) => {
+ const[greet, setGreet] = useState("");
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch("http://localhost:5000/getdata", {
+          credentials: "include",
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch data");
+        }
+
+        const data = await response.json();
+        const { name, email, phone } = data.user;
+        setGreet(`Welcome back, ${name}!`);
+      
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    fetchData();
+  }, []);
+
   const handleWidget = () => {
     const widget = document.querySelector(".rent-widget");
     widget.classList.add("show-widget");
@@ -22,8 +47,7 @@ const Home = (props) => {
             </h5>
 
             <p className="intro-text text-slogan">
-              Join our Community, make connections, and create a better world
-              together.
+            {greet || "Join our Community, make connections, and create a better world together."}
             </p>
           </motion.div>
 

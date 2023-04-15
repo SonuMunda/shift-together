@@ -66,6 +66,11 @@ const Header = () => {
                 Signup
               </NavLink>
             </li>
+            <li className="nav-item">
+              <NavLink to="/logout" className="nav-link" onClick={closeNavbar}>
+                Logout
+              </NavLink>
+            </li>
           </ul>
         </nav>
 

@@ -153,11 +153,18 @@ router.post("/contact", async (req, res) => {
     await Messages.save();
 
     // Return a success message
-    res.status(201).json({ success: true, message: "Message sent successfully" });
+    res
+      .status(201)
+      .json({ success: true, message: "Message sent successfully" });
   } catch (err) {
     console.log(err);
     res.status(500).json({ success: false, error: "Internal server error" });
   }
+});
+
+router.get("/logout", (req, res) => {
+  res.clearCookie("token", { path: "/" });
+  res.status(200).send("Logout Successfully");
 });
 
 module.exports = router;
