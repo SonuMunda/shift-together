@@ -7,7 +7,7 @@ import signupImg from "/images/signup_bg.png";
 import RentWidget from "../../components/RentWidget/RentWidget";
 
 const Register = () => {
-  const [useDetails, setuseDetails] = useState({
+  const [userDetails, setuserDetails] = useState({
     name: "",
     email: "",
     phone: "",
@@ -17,8 +17,8 @@ const Register = () => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setuseDetails((prevuseDetails) => ({
-      ...prevuseDetails,
+    setuserDetails((prevuserDetails) => ({
+      ...prevuserDetails,
       [name]: value,
     }));
   };
@@ -27,7 +27,7 @@ const Register = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const { name, email, phone, password, cpassword } = useDetails;
+    const { name, email, phone, password, cpassword } = userDetails;
 
     try {
       const response = await axios.post("http://localhost:5000/register", {
@@ -40,7 +40,7 @@ const Register = () => {
 
       console.log(response.data);
       window.alert("Registration Successful");
-      setuseDetails({
+      setuserDetails({
         name: "",
         email: "",
         phone: "",
@@ -76,7 +76,7 @@ const Register = () => {
                       name="name"
                       className="signup-form-control"
                       placeholder="name"
-                      value={useDetails.name}
+                      value={userDetails.name}
                       onChange={handleChange}
                       required
                     />
@@ -90,7 +90,7 @@ const Register = () => {
                       name="email"
                       className="signup-form-control"
                       placeholder="Email"
-                      value={useDetails.email}
+                      value={userDetails.email}
                       onChange={handleChange}
                       required
                     />
@@ -104,7 +104,7 @@ const Register = () => {
                       name="phone"
                       className="signup-form-control"
                       placeholder="Phone"
-                      value={useDetails.phone}
+                      value={userDetails.phone}
                       onChange={handleChange}
                       required
                     />
@@ -118,7 +118,7 @@ const Register = () => {
                       name="password"
                       className="signup-form-control"
                       placeholder="Password"
-                      value={useDetails.password}
+                      value={userDetails.password}
                       onChange={handleChange}
                       required
                     />
@@ -132,7 +132,7 @@ const Register = () => {
                       name="cpassword"
                       className="signup-form-control"
                       placeholder="Confirm Password"
-                      value={useDetails.cpassword}
+                      value={userDetails.cpassword}
                       onChange={handleChange}
                       required
                     />

@@ -34,6 +34,16 @@ const userSchema = new mongoose.Schema({
   ],
 });
 
+userSchema.methods.addMessage = async function (name, email, phone, message) {
+  try {
+    this.messages = this.messages.concat({ name, email, phone, message });
+    await this.save();
+    return this.messages;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 const User = mongoose.model("User", userSchema);
 
 module.exports = User;

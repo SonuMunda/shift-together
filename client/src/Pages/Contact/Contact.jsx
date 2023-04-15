@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "./Contact.css";
+import axios from "axios";
 import RentWidget from "../../components/RentWidget/RentWidget";
 import { FaMobileAlt, FaEnvelope, FaMapMarkedAlt } from "react-icons/fa";
 const Contact = () => {
   const [userData, setUserData] = useState({
-    userName: "",
-    userEmail: "",
-    userPhone: "",
-    userMessage: "",
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
   });
 
   useEffect(() => {
@@ -25,9 +26,9 @@ const Contact = () => {
         const { name, email, phone } = data.user;
         setUserData({
           ...userData,
-          userName: name,
-          userEmail: email,
-          userPhone: phone,
+          name: name,
+          email: email,
+          phone: phone,
         });
       } catch (error) {
         console.error(error);
@@ -48,26 +49,32 @@ const Contact = () => {
     event.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:5000/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userData),
-      });
+      // Validate form data before sending
+      const { name, email, phone, message } = userData;
 
-      if (!response.ok) {
+      if (!name || !email || !phone || !message) {
+        throw new Error("Please fill out all required fields.");
+      }
+
+      const response = await axios.post(
+        "http://localhost:5000/contact",
+        userData
+      );
+
+      if (!response.data.success) {
         throw new Error("Failed to send data");
       }
 
       // Clear form data after successful submission
-      setUserData({ ...userData, userMessage: "" });
+      setUserData({
+        message: "",
+      });
 
       // Show success message to user
-      alert("Form submitted successfully!");
+      alert("Message sent successfully!");
     } catch (error) {
       console.error(error);
-      alert("Failed to submit form. Please try again later.");
+      alert("Failed to send message");
     }
   };
 
@@ -140,15 +147,15 @@ const Contact = () => {
 
             {/* Contact form */}
 
-            <form onSubmit={handleFormSubmit}>
+            <form method="POST" onSubmit={handleFormSubmit}>
               <div className="form-group-row">
                 <div className="form-group">
                   <input
                     type="text"
-                    name="userName"
+                    name="name"
                     placeholder="John"
                     className="form-control"
-                    value={userData.userName || ""}
+                    value={userData.name || ""}
                     onChange={handleChange}
                     required
                   />
@@ -156,10 +163,10 @@ const Contact = () => {
                 <div className="form-group">
                   <input
                     type="email"
-                    name="userEmail"
+                    name="email"
                     placeholder="jhon@email.com"
                     className="form-control"
-                    value={userData.userEmail || ""}
+                    value={userData.email || ""}
                     onChange={handleChange}
                     required
                     pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
@@ -168,10 +175,10 @@ const Contact = () => {
                 <div className="form-group">
                   <input
                     type="text"
-                    name="userPhone"
+                    name="phone"
                     placeholder="6800000021"
                     className="form-control"
-                    value={userData.userPhone || ""}
+                    value={userData.phone || ""}
                     onChange={handleChange}
                     required
                     pattern="[0-9]{10}"
@@ -180,7 +187,7 @@ const Contact = () => {
               </div>
               <div className="form-group">
                 <textarea
-                  name="userMessage" // change name attribute
+                  name="message" // change name attribute
                   id="msg-box"
                   cols="30"
                   rows="10"
@@ -188,7 +195,7 @@ const Contact = () => {
                   className="form-control"
                   required
                   onChange={handleChange}
-                  value={userData.userMessage}
+                  value={userData.message}
                   maxLength="200"
                 ></textarea>
               </div>

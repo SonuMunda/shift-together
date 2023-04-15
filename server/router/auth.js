@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const UserMessage = require("../model/userMessageSchema");
 
 const Authenticate = require("../middleware/authenticate");
 
@@ -127,7 +128,8 @@ router.get("/getdata", Authenticate, async (req, res) => {
   }
 });
 
-router.get("/contact", async (req, res) => {
+// Route handler for submitting contact form
+router.post("/contact", async (req, res) => {
   try {
     const { name, email, phone, message } = req.body;
 
@@ -139,13 +141,22 @@ router.get("/contact", async (req, res) => {
         .json({ error: "Please fill out all required fields." });
     }
 
-    // Return a success message
-    res.json({
-      message: "Thank you for your message. We will be in touch shortly.",
+    // Create a new UserMessage instance
+    const Messages = new UserMessage({
+      name,
+      email,
+      phone,
+      message,
     });
+
+    // Save the userMessage to the database
+    await Messages.save();
+
+    // Return a success message
+    res.status(201).json({ success: true, message: "Message sent successfully" });
   } catch (err) {
     console.log(err);
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).json({ success: false, error: "Internal server error" });
   }
 });
 
