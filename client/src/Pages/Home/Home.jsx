@@ -17,7 +17,7 @@ const Home = (props) => {
         }
 
         const data = await response.json();
-        const { name, email, phone } = data.user;
+        const { name } = data.user;
         setGreet(`Welcome back, ${name}!`);
       
       } catch (error) {

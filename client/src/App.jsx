@@ -11,7 +11,6 @@ import About from "./Pages/About/About";
 import Login from "./Pages/Login/Login";
 import Register from "./Pages/Register/Register";
 import Helpline from "./Pages/Helpline/Helpline";
-import Logout from "./components/Logout/Logout";
 import PlanCard from "./components/Plans Card/PlanCard";
 import FacilitiesCard from "./components/Facilities Card/FacilitiesCard";
 function App() {
@@ -38,7 +37,6 @@ function App() {
           <Route path="/helpline" element={<Helpline />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Register />} />
-          <Route path="/logout" element={<Logout/>} />
         </Routes>
         <Footer />
         

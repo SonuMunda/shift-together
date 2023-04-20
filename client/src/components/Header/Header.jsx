@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Header.css";
 import brand from "/images/brand.png";
-import { NavLink } from "react-router-dom";
-import { FaBars } from "react-icons/fa";
+import { NavLink, useNavigate } from "react-router-dom";
+import { FaBars, FaLeaf } from "react-icons/fa";
 import { useState } from "react";
-import {animate, motion} from 'framer-motion'
+import { animate, motion } from "framer-motion";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,8 +24,20 @@ const Header = () => {
     }
   };
 
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    console.log("Logout clicked"); // Add this line
+    localStorage.removeItem("token");
+    navigate("/login");
+    closeNavbar();
+  };
+
   return (
-    <motion.header initial={{marginTop:"-75"}} animate={{marginTop:0}} transition={{type:'spring' , delay:0.4}}>
+    <motion.header
+      initial={{ marginTop: "-75" }}
+      animate={{ marginTop: 0 }}
+      transition={{ type: "spring", delay: 0.4 }}
+    >
       <div className="header-container">
         <div className="header-row">
           <div className="menubar">
@@ -57,24 +69,27 @@ const Header = () => {
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink to="/login" className="nav-link" onClick={closeNavbar}>
-                Login
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink to="/signup" className="nav-link" onClick={closeNavbar}>
-                Signup
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink to="/logout" className="nav-link" onClick={closeNavbar}>
-                Logout
+              <NavLink
+                to="/helpline"
+                className="nav-link"
+                onClick={closeNavbar}
+              >
+                Helpline
               </NavLink>
             </li>
           </ul>
         </nav>
 
         <div className="header-btns">
+          {!localStorage.getItem("token") ? (
+            <NavLink to="/login" onClick={closeNavbar}>
+              <button className="header-btn">Login</button>
+            </NavLink>
+          ) : (
+            <button className="header-btn" onClick={handleLogout}>
+              Logout
+            </button>
+          )}
           <button
             className="header-btn"
             id="header-rent-btn"

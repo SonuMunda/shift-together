@@ -6,6 +6,7 @@ import loginBG from "/images/login_bg.png";
 import RentWidget from "../../components/RentWidget/RentWidget";
 
 const Login = () => {
+ 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
