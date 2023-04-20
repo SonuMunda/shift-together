@@ -8,6 +8,7 @@ import { animate, motion } from "framer-motion";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
 
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
@@ -25,12 +26,32 @@ const Header = () => {
   };
 
   const navigate = useNavigate();
-  const handleLogout = () => {
-    console.log("Logout clicked"); // Add this line
-    localStorage.removeItem("token");
-    navigate("/login");
-    closeNavbar();
+  const handleLogout = async () => {
+    try {
+      const res = await fetch("http://localhost:5000/logout", {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      });
+
+      if (res.status !== 200) {
+        const error = new Error(res.error);
+        throw error;
+      }
+
+      localStorage.removeItem("token");
+      setIsLoggedIn(false); // <-- Update isLoggedIn state immediately
+      navigate("/login");
+    } catch (err) {
+      console.log(err);
+    }
   };
+
+  useEffect(() => {
+    setIsLoggedIn(!!localStorage.getItem("token"));
+  }, []);
 
   return (
     <motion.header
@@ -81,14 +102,14 @@ const Header = () => {
         </nav>
 
         <div className="header-btns">
-          {!localStorage.getItem("token") ? (
-            <NavLink to="/login" onClick={closeNavbar}>
-              <button className="header-btn">Login</button>
-            </NavLink>
-          ) : (
+          {isLoggedIn ? (
             <button className="header-btn" onClick={handleLogout}>
               Logout
             </button>
+          ) : (
+            <NavLink to="/login" onClick={closeNavbar}>
+              <button className="header-btn">Login</button>
+            </NavLink>
           )}
           <button
             className="header-btn"

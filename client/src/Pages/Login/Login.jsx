@@ -36,6 +36,7 @@ const Login = () => {
 
         window.alert("Login Successfull");
         navigate("/");
+        window.location.reload(); 
       }
     } catch (error) {
       setError("Something went wrong");

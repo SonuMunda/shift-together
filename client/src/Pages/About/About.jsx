@@ -1,6 +1,6 @@
 import React from "react";
 import "./About.css";
-import {motion} from 'framer-motion';
+import { motion, spring } from "framer-motion";
 import aboutImg from "/images/about-image-1.jpg";
 import storyImg from "/images/about-image-2.jpg";
 import RentWidget from "../../components/RentWidget/RentWidget";
@@ -11,8 +11,11 @@ const About = () => {
 
       <section className="about-intro">
         <div className="about-intro-container">
-          <motion.div className="intro-text" 
-           initial={{scale:0}} animate={{scale:1}} transition={{type:'spring' , delay:0.4}}
+          <motion.div
+            className="intro-text"
+            initial={{ marginBottom: "20" }}
+            animate={{ marginBottom: 0 }}
+            transition={{ type: "spring", delay: 0.4 }}
           >
             <h3 className="intro-text">
               <span className="intro-heading text-uppercase">About</span>
@@ -29,19 +32,34 @@ const About = () => {
       <section className="about-us">
         <div className="about-us-container p-4">
           <div className="about-row">
-            <div className="about-col">
+            <motion.div
+              className="about-col"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: false, amount: 0.4 }}
+            >
               <div className="about-us-img">
                 <img src={aboutImg} alt="" />
               </div>
-            </div>
+            </motion.div>
             <div className="about-col">
               <div className="about-us-content">
-                <div className="about-us-heading p-3">
+                <motion.div
+                  className="about-us-heading p-3"
+                  initial={{ marginLeft: "-100vw" }}
+                  whileInView={{ marginLeft: "0" }}
+                  viewport={{ once: false, amount: 0.4 }}
+                >
                   <h3 className="text-uppercase text-center fw-bold ">
                     About us
                   </h3>
-                </div>
-                <div className="about-us-text">
+                </motion.div>
+                <motion.div
+                  className="about-us-text"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: false, amount: 0.4 }}
+                >
                   <p>
                     Welcome to Shift Together, a community-driven website
                     dedicated to creating positive change in the world. Our
@@ -64,7 +82,7 @@ const About = () => {
                     working together with you to make a positive impact in the
                     world.
                   </p>
-                </div>
+                </motion.div>
               </div>
             </div>
           </div>
@@ -76,11 +94,16 @@ const About = () => {
           <div className="story-row">
             <div className="story-col">
               <div className="story-content">
-                <div className="story-heading p-3">
+                <motion.div
+                  className="story-heading p-3"
+                  initial={{ marginRight:"-100vw"}}
+                  whileInView={{ marginRight:0 }}
+                  viewport={{ once: false, amount: 0.1 }}
+                >
                   <h3 className="text-center text-uppercase fw-bold ">
                     Our Story
                   </h3>
-                </div>
+                </motion.div>
                 <div className="story-text">
                   <p>
                     Shift Together is a website created by a group of
@@ -105,11 +128,16 @@ const About = () => {
               </div>
             </div>
 
-            <div className="story-col">
+            <motion.div
+              className="story-col"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: false, amount: 0.4 }}
+            >
               <div className="story-img">
                 <img src={storyImg} alt="" />
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>

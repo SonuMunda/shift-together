@@ -162,9 +162,9 @@ router.post("/contact", async (req, res) => {
   }
 });
 
-// router.get("/logout", (req, res) => {
-//   res.clearCookie("token", { path: "/" });
-//   res.status(200).send("Logout Successfully");
-// });
+router.get("/logout", (req, res) => {
+  res.clearCookie("token", { path: "/" });
+  res.status(200).send("Logout Successfully");
+});
 
 module.exports = router;

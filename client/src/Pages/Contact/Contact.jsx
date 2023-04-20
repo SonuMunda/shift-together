@@ -66,8 +66,8 @@ const Contact = () => {
       }
 
       // Clear form data after successful submission
-      setUserData({
-        message: "",
+      setUserData((prevState) => {
+        return { ...prevState, message: "" };
       });
 
       // Show success message to user
