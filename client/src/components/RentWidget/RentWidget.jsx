@@ -65,6 +65,7 @@ const RentWidget = () => {
                     name="move-in-date"
                     required
                     className="widget-control"
+                    min={new Date().toISOString().split('T')[0]}
                   />
                 </div>
 

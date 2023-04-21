@@ -154,3 +154,13 @@ header {
     font-size: 14px;
   }
 }
+
+@media screen and (max-width: 414px){
+  .brand img {
+    height: 32px;
+  }
+  .header-btns .header-btn {
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+}
