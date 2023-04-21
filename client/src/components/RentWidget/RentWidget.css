@@ -1,59 +1,69 @@
+.widget-wrapper {
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  backdrop-filter: blur(8px);
+  transform: scale(0);
+  transition: all 0.4s ease-in-out;
+}
+
+.show-widget {
+  transform: scale(1);
+}
 
 .rent-widget {
-  position: fixed;
-  top: 100vh;
-  left: 50%;
-  height: 90vh;
-  transform: translateX(-50%);
-  background-color: #101010;
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: white;
-  width: 50%;
+  width: fit-content;
   border-radius: 8px;
-  box-shadow: inset 0px 0px 4px rgb(163, 163, 163);
-  padding: 1rem 0.4rem;
   z-index: 1;
-  transition: all 0.4s ease-in-out;
   overflow: hidden;
-}
-
-.show-widget{
-  top: 9vh;
-}
-
-.widget-container{
-  position: relative;
-  height: 100%;
-  width: 100%;
-  border-radius: 8px;
-  overflow-y: scroll;
+  padding: 1rem 0.4rem;
+  background-color: #101010;
+  box-shadow: inset 0px 0px 4px rgb(163, 163, 163);
 }
 
 .widget-container::-webkit-scrollbar {
   display: none;
 }
 
-
 .widget-close-btn {
   position: absolute;
-  top: 10px;
-  right: 15px;
+  top: 1rem;
+  right: 2rem;
   cursor: pointer;
-  font-size: 2rem;
-  font-weight: bold;
+  font-size: 2.5rem;
   border: none;
   outline: none;
   border-radius: 4px;
   background-color: transparent;
-  color: white;
+  color: rgb(255, 255, 255);
 }
 
 .widget-text {
-  padding: 1rem;
   margin: 0.5rem;
   text-align: center;
   text-transform: uppercase;
   font-weight: bold;
 }
+
+.wdgt-inr-row {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.wdgt-inr-row .widget-form-group {
+  width: 100%;
+}
+
 .widget-form-group {
   display: flex;
   flex-direction: column;
@@ -94,14 +104,41 @@
   border-radius: 4px;
 }
 
-@media screen and (max-width:992px) {
-  .rent-widget{
+/* @media screen and (max-width: 992px) {
+  .rent-widget {
     width: 80%;
   }
-}
+} */
 
-@media screen and (max-width:574px) {
-  .rent-widget{
-    width: 98%;
+@media screen and (max-width: 574px) {
+  .rent-widget {
+    width: 96%;
+  }
+  .widget-container {
+    height: 100%;
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: scroll;
+  }
+  .wdgt-inr-row {
+    flex-direction: column;
+  }
+
+  .widget-form {
+    width: 100%;
+  }
+
+  .widget-form-group {
+    margin: 8px 0;
+  }
+
+  .widget-close-btn {
+  right: 10px;
+  top: 10px;
+  font-size: 1.5rem;
+  font-weight: bold;
   }
 }

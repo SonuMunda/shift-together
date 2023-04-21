@@ -96,15 +96,20 @@ const About = () => {
               <div className="story-content">
                 <motion.div
                   className="story-heading p-3"
-                  initial={{ marginRight:"-100vw"}}
-                  whileInView={{ marginRight:0 }}
+                  initial={{ marginRight: "-100vw" }}
+                  whileInView={{ marginRight: 0 }}
                   viewport={{ once: false, amount: 0.1 }}
                 >
                   <h3 className="text-center text-uppercase fw-bold ">
                     Our Story
                   </h3>
                 </motion.div>
-                <div className="story-text">
+                <motion.div
+                  className="story-text"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: false, amount: 0.4 }}
+                >
                   <p>
                     Shift Together is a website created by a group of
                     individuals with a shared vision of making a positive impact
@@ -124,7 +129,7 @@ const About = () => {
                     welcoming and inclusive community where you can connect,
                     learn, and take action.
                   </p>
-                </div>
+                </motion.div>
               </div>
             </div>
 
@@ -144,7 +149,12 @@ const About = () => {
       <hr />
       {/* Mission */}
       <section className="mission">
-        <div className="mission-container">
+        <motion.div
+          className="mission-container"
+          initial={{ scale: 0 }}
+          whileInView={{ scale: 1 }}
+          viewport={{ once: false, amount: 0.4 }}
+        >
           <div className="heading">
             <h2 className="fw-bold text-uppercase py-2">Our Vision</h2>
           </div>
@@ -164,7 +174,7 @@ const About = () => {
               economical costs.
             </p>
           </div>
-        </div>
+        </motion.div>
       </section>
     </div>
   );

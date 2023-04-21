@@ -1,9 +1,9 @@
-import React, {useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import "./Home.css";
-import { motion } from "framer-motion"
+import { motion } from "framer-motion";
 import RentWidget from "../../components/RentWidget/RentWidget";
 const Home = (props) => {
- const[greet, setGreet] = useState("");
+  const [greet, setGreet] = useState("");
 
   useEffect(() => {
     async function fetchData() {
@@ -19,7 +19,6 @@ const Home = (props) => {
         const data = await response.json();
         const { name } = data.user;
         setGreet(`Welcome back, ${name}!`);
-      
       } catch (error) {
         console.error(error);
       }
@@ -29,7 +28,7 @@ const Home = (props) => {
   }, []);
 
   const handleWidget = () => {
-    const widget = document.querySelector(".rent-widget");
+    const widget = document.querySelector(".widget-wrapper");
     widget.classList.add("show-widget");
   };
 
@@ -39,21 +38,29 @@ const Home = (props) => {
 
       <section className="home-intro">
         <div className="home-intro-container container">
-          <motion.div className="home-intro-text"
-          initial={{marginBottom:"20"}} animate={{marginBottom:0}} transition={{type:'spring' , delay:0.4}}
+          <motion.div
+            className="home-intro-text"
+            initial={{ marginBottom: "20" }}
+            animate={{ marginBottom: 0 }}
+            transition={{ type: "spring", delay: 0.4 }}
           >
             <h5 className="intro-text text-community">
               <span>Shift Together Community</span>
             </h5>
 
             <p className="intro-text text-slogan">
-            {greet || "Join our Community, make connections, and create a better world together."}
+              {greet ||
+                "Join our Community, make connections, and create a better world together."}
             </p>
           </motion.div>
 
           <div className="rent-btn-container">
-            <motion.button className="rent-flat-button" onClick={handleWidget}
-            initial={{marginLeft:"-100vw"}} animate={{marginLeft:0}} transition={{type:'spring' , delay:0.4}}
+            <motion.button
+              className="rent-flat-button"
+              onClick={handleWidget}
+              initial={{ marginLeft: "-100vw" }}
+              animate={{ marginLeft: 0 }}
+              transition={{ type: "spring", delay: 0.4 }}
             >
               Rent a Flat
             </motion.button>
@@ -64,11 +71,16 @@ const Home = (props) => {
       {/* Plans Section */}
       <section className="plans">
         <div className="plans-container p-4">
-          <div className="plans-heading">
+          <motion.div
+            className="plans-heading"
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: false, amount: 0.4 }}
+          >
             <h2 className="text-center fw-bold my-4 py-2 text-uppercase">
               Floor Plans & Price
             </h2>
-          </div>
+          </motion.div>
           {props.PlanCard}
         </div>
       </section>
@@ -76,15 +88,30 @@ const Home = (props) => {
       {/* Facilities Section */}
       <section className="facilities">
         <div className="facilities-container container py-4">
-          <div className="facilities-heading">
+          <motion.div
+            className="facilities-heading"
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: false, amount: 0.4 }}
+          >
             <h2 className="text-center fw-bold my-4 py-2 text-uppercase">
               Facilities & Amenities
             </h2>
-          </div>
-          <div className="facilities-sub-heading">
+          </motion.div>
+          <motion.div
+            className="facilities-sub-heading"
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: false, amount: 0.4 }}
+          >
             <h6 className="fw-bold text-uppercase">Top Facilities</h6>
-          </div>
-          <div className="facilities-text">
+          </motion.div>
+          <motion.div
+            className="facilities-text"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: false, amount: 0.4 }}
+          >
             <p>
               Shift Together presents an exclusive opportunity to own a stunning
               home that offers all kinds of amenities and facilities. This
@@ -94,14 +121,13 @@ const Home = (props) => {
               excellent combination of comfort and convenience to suit every
               requirement as well as need.
             </p>
-          </div>
+          </motion.div>
 
           <div className="facilities-content">{props.FacilitiesCard}</div>
         </div>
       </section>
 
       <hr />
-
     </div>
   );
 };

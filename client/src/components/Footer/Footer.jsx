@@ -31,23 +31,23 @@ const Footer = () => {
             <h3>Follow us</h3>
             <ul className="d-flex my-2">
               <li className="mx-2">
-                <Link>
-                  <FaFacebook className="f-icon"/>
+                <Link to="https://www.facebook.com/profile.php?id=100091761383031" target="_blank">
+                  <FaFacebook className="f-icon" />
                 </Link>
               </li>
               <li className="mx-2">
-                <Link>
-                  <FaTwitter className="f-icon"/>
+                <Link to="https://twitter.com/Shift_Together" target="_blank">
+                  <FaTwitter className="f-icon" />
                 </Link>
               </li>
               <li className="mx-2">
-                <Link>
-                  <FaInstagram className="f-icon"/>
+                <Link to="https://instagram.com/shifttogetherwebsite?igshid=ZDdkNTZiNTM=" target="_blank">
+                  <FaInstagram className="f-icon" />
                 </Link>
               </li>
               <li className="mx-2">
-                <Link>
-                  <FaLinkedin className="f-icon"/>
+                <Link to="https://www.linkedin.com/in/shift-together-596698273/" target="_blank">
+                  <FaLinkedin className="f-icon" />
                 </Link>
               </li>
             </ul>

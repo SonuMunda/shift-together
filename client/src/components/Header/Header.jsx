@@ -19,7 +19,7 @@ const Header = () => {
   };
 
   const openWidget = () => {
-    const widget = document.querySelector(".rent-widget");
+    const widget = document.querySelector(".widget-wrapper");
     if (widget) {
       widget.classList.add("show-widget");
     }

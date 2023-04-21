@@ -78,10 +78,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
+  background: url("/images/pexels-curtis-adams-3773572.jpg") center center/cover
+  no-repeat;
 }
 
-.mission ::before {
+/* .mission ::before {
   content: "";
   position: absolute;
   height: 100%;
@@ -91,7 +92,7 @@
   background: url("/images/pexels-curtis-adams-3773572.jpg") center center/cover
     no-repeat;
   z-index: -1;
-}
+} */
 
 .mission-container {
   padding: 2rem;
