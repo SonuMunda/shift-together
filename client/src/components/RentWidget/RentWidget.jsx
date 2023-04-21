@@ -1,7 +1,48 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./RentWidget.css";
 
 const RentWidget = () => {
+  const [userData, setUserData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch("http://localhost:5000/getdata", {
+          credentials: "include",
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch data");
+        }
+
+        const data = await response.json();
+        const { name, email, phone } = data.user;
+        setUserData({
+          ...userData,
+          name: name,
+          email: email,
+          phone: phone,
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    fetchData();
+  }, []);
+
+  const handleChange = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+
+    setUserData({ ...userData, [name]: value });
+  };
+
   const closeWidget = () => {
     const widget = document.querySelector(".widget-wrapper");
     widget.classList.remove("show-widget");
@@ -29,6 +70,8 @@ const RentWidget = () => {
                   placeholder="Enter name"
                   required
                   className="widget-control"
+                  value={userData.name || " "}
+                  onChange={handleChange}
                 />
               </div>
               <div className="wdgt-inr-row">
@@ -41,6 +84,8 @@ const RentWidget = () => {
                     placeholder="Enter email"
                     required
                     className="widget-control"
+                    value={userData.email || " "}
+                    onChange={handleChange}
                   />
                 </div>
                 <div className="widget-form-group">
@@ -53,6 +98,8 @@ const RentWidget = () => {
                     placeholder="Enter phone"
                     required
                     className="widget-control"
+                    value={userData.phone || " "}
+                    onChange={handleChange}
                   />
                 </div>
               </div>
@@ -65,7 +112,7 @@ const RentWidget = () => {
                     name="move-in-date"
                     required
                     className="widget-control"
-                    min={new Date().toISOString().split('T')[0]}
+                    min={new Date().toISOString().split("T")[0]}
                   />
                 </div>
 
