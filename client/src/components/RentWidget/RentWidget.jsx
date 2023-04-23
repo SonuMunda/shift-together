@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { FaCheckCircle } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import "./RentWidget.css";
 
 const RentWidget = () => {
@@ -6,8 +9,23 @@ const RentWidget = () => {
     name: "",
     email: "",
     phone: "",
-    message: "",
+    date: "",
+    duration: "",
+    location: "",
+    size: "",
   });
+
+  //state for success message
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+
+  // Get today's date
+  const today = new Date();
+
+  // Calculate the date 4 days from now
+  const moveInDate = new Date(today.getTime() + 3 * 24 * 60 * 60 * 1000);
+
+  // Format the date as a string in ISO format (YYYY-MM-DD)
+  const formattedDate = moveInDate.toISOString().split("T")[0];
 
   useEffect(() => {
     async function fetchData() {
@@ -43,6 +61,59 @@ const RentWidget = () => {
     setUserData({ ...userData, [name]: value });
   };
 
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      // Validate form data before sending
+      const { name, email, phone, date, duration, location, size } = userData;
+
+      if (
+        !name ||
+        !email ||
+        !phone ||
+        !date ||
+        !duration ||
+        !location ||
+        !size
+      ) {
+        throw new Error("Please fill out all required fields.");
+      }
+
+      const response = await axios.post("http://localhost:5000/rent", userData);
+
+      if (!response.data.success) {
+        throw new Error("Failed to send data");
+      }
+
+      // Clear form data after successful submission
+      setUserData((prevState) => {
+        return {
+          ...prevState,
+          message: "",
+          date: "",
+          duration: "",
+          location: "",
+          size: "",
+        };
+      });
+
+      // Show success message to user
+      setShowSuccessMessage(true);
+
+      // Hide success message after 10 seconds
+      setTimeout(
+        () => {
+          setShowSuccessMessage(false);
+        },
+        5000,
+      );
+    } catch (error) {
+      console.error(error);
+      alert("Failed to send message");
+    }
+  };
+
   const closeWidget = () => {
     const widget = document.querySelector(".widget-wrapper");
     widget.classList.remove("show-widget");
@@ -60,7 +131,11 @@ const RentWidget = () => {
           </div>
 
           <div className="widget-form">
-            <form className="widget-form">
+            <form
+              className="widget-form"
+              onSubmit={handleFormSubmit}
+              method="POST"
+            >
               <div className="widget-form-group">
                 <label htmlFor="name">Name: </label>
                 <input
@@ -109,10 +184,12 @@ const RentWidget = () => {
                   <input
                     type="date"
                     id="move-in-date"
-                    name="move-in-date"
+                    name="date"
                     required
                     className="widget-control"
-                    min={new Date().toISOString().split("T")[0]}
+                    value={userData.date}
+                    onChange={handleChange}
+                    min={formattedDate}
                   />
                 </div>
 
@@ -123,7 +200,10 @@ const RentWidget = () => {
                     name="duration"
                     required
                     className="widget-control"
+                    value={userData.duration}
+                    onChange={handleChange}
                   >
+                    <option value="">Choose Duration</option>
                     <option value="1 month">1 month</option>
                     <option value="3 months">3 months</option>
                     <option value="6 months">6 months</option>
@@ -141,12 +221,15 @@ const RentWidget = () => {
                     name="location"
                     required
                     className="widget-control"
+                    value={userData.location}
+                    onChange={handleChange}
                   >
-                    <option value="mohali">Mohali</option>
-                    <option value="chandigarh">Chandigarh</option>
-                    <option value="patiala">Patiala</option>
+                    <option value="">Select Location</option>
+                    <option value="Mohali">Mohali</option>
+                    <option value="Chandigarh">Chandigarh</option>
+                    <option value="Patiala">Patiala</option>
                     <option value="Kharar">Kharar</option>
-                    <option value="morinda">Morinda</option>
+                    <option value="Morinda">Morinda</option>
                   </select>
                 </div>
 
@@ -154,10 +237,13 @@ const RentWidget = () => {
                   <label htmlFor="flatSize">Flat Size</label>
                   <select
                     id="flatSize"
-                    name="flatSize"
+                    name="size"
                     required
                     className="widget-control"
+                    value={userData.size}
+                    onChange={handleChange}
                   >
+                    <option value="">Choose Flat Type</option>
                     <option value="1 BHK">1 BHK</option>
                     <option value="2 BHK">2 BHK</option>
                     <option value="3 BHK">3 BHK</option>
@@ -174,6 +260,19 @@ const RentWidget = () => {
           </div>
         </div>
       </div>
+      {showSuccessMessage && (
+        <div className="success-message">
+          <div className="sucess-icon mx-2 fs-3">
+            <FaCheckCircle />
+          </div>
+          <div className="msg">
+            <p>
+              Thank you for your interest in renting our flat. We will check
+              available flats and contact you later.
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

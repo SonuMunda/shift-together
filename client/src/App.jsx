@@ -13,6 +13,7 @@ import Register from "./Pages/Register/Register";
 import Helpline from "./Pages/Helpline/Helpline";
 import PlanCard from "./components/Plans Card/PlanCard";
 import FacilitiesCard from "./components/Facilities Card/FacilitiesCard";
+import ErrorPage from "./Pages/Error Page/ErrorPage";
 function App() {
   return (
     <>
@@ -37,9 +38,9 @@ function App() {
           <Route path="/helpline" element={<Helpline />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Register />} />
+          <Route path="*" element={<ErrorPage />} />
         </Routes>
         <Footer />
-        
       </Router>
     </>
   );

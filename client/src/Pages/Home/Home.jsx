@@ -18,7 +18,7 @@ const Home = (props) => {
 
         const data = await response.json();
         const { name } = data.user;
-        setGreet(`Welcome back, ${name}!`);
+        setGreet(`Welcome , ${name} !`);
       } catch (error) {
         console.error(error);
       }
@@ -87,14 +87,14 @@ const Home = (props) => {
       <hr />
       {/* Facilities Section */}
       <section className="facilities">
-        <div className="facilities-container container py-4">
+        <div className="facilities-container container p-4">
           <motion.div
             className="facilities-heading"
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             viewport={{ once: false, amount: 0.4 }}
           >
-            <h2 className="text-center fw-bold my-4 py-2 text-uppercase">
+            <h2 className="text-center fw-bold my-4 p-2 text-uppercase">
               Facilities & Amenities
             </h2>
           </motion.div>

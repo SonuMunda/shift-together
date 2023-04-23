@@ -7,7 +7,7 @@ const Footer = () => {
     <footer>
       <div className="footer-content">
         <div className="f-row d-flex justify-content-around p-4">
-          <div className="f-col d-flex align-items-center justify-content-center">
+          <div className="f-col d-flex align-items-center justify-content-center" id="company">
             <h3 className="text-uppercase">Shift Together</h3>
           </div>
           <div className="f-col">

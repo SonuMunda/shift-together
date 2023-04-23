@@ -1,0 +1,35 @@
+.error-page {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.error-page .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.error-status h1{
+    font-size: 8rem;
+}
+
+.error-link a{
+    text-decoration: none;
+    border: 4px solid black;
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    color: black;
+
+    font-weight: bold;
+    transition: all 0.4s ease-out;
+}
+
+.error-link a:hover{
+    background-color: black;
+    color: white;
+    border-radius: 30px;
+}

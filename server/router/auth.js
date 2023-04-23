@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const UserMessage = require("../model/userMessageSchema");
+const UserFlatRequest = require("../model/userFlatRequestsSchema");
 
 const Authenticate = require("../middleware/authenticate");
 
@@ -156,6 +157,43 @@ router.post("/contact", async (req, res) => {
     res
       .status(201)
       .json({ success: true, message: "Message sent successfully" });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ success: false, error: "Internal server error" });
+  }
+});
+
+// Route handler for submitting rent form
+router.post("/rent", async (req, res) => {
+  try {
+    const { name, email, phone, date, duration, location, size } = req.body;
+
+    // Check if any of the required fields are missing
+    if (!name || !email || !phone || !date || !duration || !location || !size) {
+      console.log("Fill All Fields");
+      return res
+        .status(400)
+        .json({ error: "Please fill out all required fields." });
+    }
+
+    // Create a new UserMessage instance
+    const FlatRequests = new UserFlatRequest({
+      name,
+      email,
+      phone,
+      date,
+      duration,
+      location,
+      size,
+    });
+
+    // Save the userMessage to the database
+    await FlatRequests.save();
+
+    // Return a success message
+    res
+      .status(201)
+      .json({ success: true, message: "Renting Flat is Requested" });
   } catch (err) {
     console.log(err);
     res.status(500).json({ success: false, error: "Internal server error" });

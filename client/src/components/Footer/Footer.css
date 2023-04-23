@@ -34,3 +34,9 @@ footer{
 .cr{
     background-color: rgb(16, 16, 16);
 }
+
+@media screen and (max-width:832px) {
+    #company{
+        justify-content: start !important;
+    }
+}
