@@ -141,12 +141,12 @@ const RentWidget = () => {
                 <input
                   type="text"
                   name="name"
-                  id="name-field"
-                  placeholder="Enter name"
-                  required
+                  
                   className="widget-control"
                   value={userData.name || " "}
                   onChange={handleChange}
+                  placeholder="Enter Name"
+                  required
                 />
               </div>
               <div className="wdgt-inr-row">
@@ -170,11 +170,11 @@ const RentWidget = () => {
                     id="phone"
                     name="phone"
                     pattern="[0-9]{10}"
-                    placeholder="Enter phone"
-                    required
                     className="widget-control"
                     value={userData.phone || " "}
                     onChange={handleChange}
+                    placeholder="Enter phone"
+                    required
                   />
                 </div>
               </div>
